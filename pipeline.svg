@@ -1,0 +1,96 @@
+<svg width="100%" viewBox="0 0 680 720" xmlns="http://www.w3.org/2000/svg" role="img" style="font-family: sans-serif; background: white;">
+  <title>LLM Toxic Comment Classification Pipeline</title>
+  <desc>Flowchart showing the full pipeline from raw Jigsaw data through EDA and sampling, then branching into BERT and GPT-4.1 prompt engineering methods, ending in evaluation and results.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: Raw data -->
+  <rect x="230" y="30" width="220" height="44" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="340" y="52" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Jigsaw dataset (160k rows)</text>
+
+  <!-- Arrow down -->
+  <line x1="340" y1="74" x2="340" y2="104" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: EDA & Sampling -->
+  <rect x="170" y="104" width="340" height="66" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+  <text font-size="13" font-weight="500" x="340" y="126" text-anchor="middle" dominant-baseline="central" fill="#085041">EDA &amp; stress-test sampling</text>
+  <text font-size="11" x="340" y="150" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Class imbalance analysis → minority-first sampling strategy</text>
+
+  <!-- Badge -->
+  <rect x="462" y="97" width="76" height="18" rx="9" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+  <text font-size="10" x="500" y="106" text-anchor="middle" dominant-baseline="central" fill="#085041">my work ✦</text>
+
+  <!-- Arrow down -->
+  <line x1="340" y1="170" x2="340" y2="196" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 8k eval set -->
+  <rect x="60" y="196" width="200" height="50" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="160" y="215" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">8k stress-test eval set</text>
+  <text font-size="11" x="160" y="234" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">50/50 clean vs toxic, minority full</text>
+
+  <!-- 151k pool -->
+  <rect x="420" y="196" width="200" height="50" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="520" y="215" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">151k RAG retrieval pool</text>
+  <text font-size="11" x="520" y="234" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">Zero-leakage few-shot bank</text>
+
+  <!-- Split lines -->
+  <path d="M340 196 L162 196" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M340 196 L518 196" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrow from 8k to models -->
+  <line x1="160" y1="246" x2="160" y2="300" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Dashed arrow from pool to GPT methods -->
+  <path d="M520 246 L520 370 L642 370" fill="none" stroke="#888780" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+
+  <!-- BERT block -->
+  <rect x="40" y="300" width="240" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="160" y="320" text-anchor="middle" dominant-baseline="central" fill="#3C3489">BERT baselines</text>
+  <text font-size="11" x="160" y="340" text-anchor="middle" dominant-baseline="central" fill="#534AB7">BERT-base-cased · Toxic-BERT</text>
+
+  <!-- GPT label -->
+  <line x1="318" y1="300" x2="318" y2="484" stroke="#888780" stroke-width="1" opacity="0.4"/>
+  <text font-size="11" x="313" y="392" text-anchor="end" dominant-baseline="central" fill="#5F5E5A">GPT-4.1</text>
+
+  <!-- M1 -->
+  <rect x="320" y="300" width="320" height="40" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="340" y="320" text-anchor="start" dominant-baseline="central" fill="#712B13">M1</text>
+  <text font-size="11" x="375" y="320" text-anchor="start" dominant-baseline="central" fill="#993C1D">Zero-shot · micro F1: 0.821</text>
+
+  <!-- M2 -->
+  <rect x="320" y="348" width="320" height="40" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="340" y="368" text-anchor="start" dominant-baseline="central" fill="#712B13">M2</text>
+  <text font-size="11" x="375" y="368" text-anchor="start" dominant-baseline="central" fill="#993C1D">Few-shot static · micro F1: 0.786</text>
+
+  <!-- M3 -->
+  <rect x="320" y="396" width="320" height="40" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="340" y="416" text-anchor="start" dominant-baseline="central" fill="#712B13">M3</text>
+  <text font-size="11" x="375" y="416" text-anchor="start" dominant-baseline="central" fill="#993C1D">RAG dynamic · micro F1: 0.827</text>
+
+  <!-- M4 -->
+  <rect x="320" y="444" width="320" height="40" rx="8" fill="#F5C4B3" stroke="#993C1D" stroke-width="1"/>
+  <text font-size="13" font-weight="500" x="340" y="464" text-anchor="start" dominant-baseline="central" fill="#4A1B0C">M4</text>
+  <text font-size="11" x="375" y="464" text-anchor="start" dominant-baseline="central" fill="#712B13">HA-RAG · micro F1: 0.829 ✦ best overall</text>
+
+  <!-- Arrow from BERT to eval -->
+  <line x1="160" y1="356" x2="160" y2="540" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow from GPT to eval -->
+  <line x1="480" y1="484" x2="480" y2="540" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Evaluation box -->
+  <rect x="40" y="540" width="600" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="13" font-weight="500" x="340" y="560" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Evaluation (micro F1, macro F1, ROC-AUC, Hamming loss)</text>
+  <text font-size="11" x="340" y="580" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">Key insight: prompt quality matters more than prompt complexity</text>
+
+  <!-- Legend -->
+  <rect x="40" y="622" width="12" height="12" rx="2" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text font-size="11" x="58" y="628" dominant-baseline="central" fill="#5F5E5A">My individual contribution</text>
+  <rect x="220" y="622" width="12" height="12" rx="2" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text font-size="11" x="238" y="628" dominant-baseline="central" fill="#5F5E5A">BERT baselines</text>
+  <rect x="360" y="622" width="12" height="12" rx="2" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text font-size="11" x="378" y="628" dominant-baseline="central" fill="#5F5E5A">GPT-4.1 prompt engineering</text>
+</svg>
