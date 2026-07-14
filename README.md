@@ -43,7 +43,7 @@ Zero-shot GPT-4.1 (M1, simplest method) achieved a **micro-F1 of 0.821** — out
 | M2: Few-Shot | GPT-4.1, 41 static examples | 0.786 | $24.09 total |
 | M3: RAG Dynamic | GPT-4.1, 7 retrieved examples | 0.827 | $11.59 total |
 | M4: HA-RAG | GPT-4.1, hybrid augmentation | 0.829 | $7.82 total |
-
+![Pipeline diagram](pipeline.svg)
 ---
 
 ## Repo structure
